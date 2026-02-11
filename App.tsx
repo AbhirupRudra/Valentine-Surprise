@@ -19,8 +19,8 @@ const App: React.FC = () => {
   const moveNoButton = useCallback(() => {
     // Generate random offsets to make it "roam" around its original spot in the box
     // Range is roughly +/- 180px horizontally and +/- 120px vertically
-    const randomX = (Math.random() - 0.5) * 360;
-    const randomY = (Math.random() - 0.5) * 240;
+    const randomX = (Math.random() - 0.5) * 1000;
+    const randomY = (Math.random() - 0.5) * 700;
     
     setNoButtonPos({
       x: randomX,
