@@ -1,7 +1,7 @@
 
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Heart, Sparkles } from 'lucide-react';
+import { Heart } from 'lucide-react';
 import FloatingHearts from './components/FloatingHearts';
 import ValentineCard from './components/ValentineCard';
 import SuccessView from './components/SuccessView';
@@ -9,6 +9,7 @@ import { NoButtonPosition } from './types';
 
 const App: React.FC = () => {
   const [isAccepted, setIsAccepted] = useState(false);
+  // Using offsets (x, y) instead of absolute screen coordinates
   const [noButtonPos, setNoButtonPos] = useState<NoButtonPosition>({ x: 0, y: 0, isAbsolute: false });
 
   const handleYes = () => {
@@ -16,26 +17,15 @@ const App: React.FC = () => {
   };
 
   const moveNoButton = useCallback(() => {
-    // Estimated dimensions of the button to ensure it doesn't clip
-    const buttonWidth = 160; 
-    const buttonHeight = 60;
-    const padding = 20;
-
-    // Calculate maximum safe coordinates
-    const maxX = window.innerWidth - buttonWidth - padding;
-    const maxY = window.innerHeight - buttonHeight - padding;
-    
-    // Ensure we don't get negative values on very small screens
-    const safeMaxX = Math.max(padding, maxX);
-    const safeMaxY = Math.max(padding, maxY);
-    
-    const randomX = padding + Math.random() * (safeMaxX - padding);
-    const randomY = padding + Math.random() * (safeMaxY - padding);
+    // Generate random offsets to make it "roam" around its original spot in the box
+    // Range is roughly +/- 180px horizontally and +/- 120px vertically
+    const randomX = (Math.random() - 0.5) * 360;
+    const randomY = (Math.random() - 0.5) * 240;
     
     setNoButtonPos({
       x: randomX,
       y: randomY,
-      isAbsolute: true
+      isAbsolute: false // Keep it relative to the container
     });
   }, []);
 

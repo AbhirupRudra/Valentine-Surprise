@@ -35,29 +35,26 @@ const ValentineCard: React.FC<ValentineCardProps> = ({ onYes, onNoHover, noButto
         Will you be my valentine? ❤️
       </h2>
 
-      <div className="flex flex-col md:flex-row items-center justify-center gap-8 min-h-[100px] relative">
+      <div className="flex flex-col md:flex-row items-center justify-center gap-8 min-h-[120px] relative">
         <button
           onClick={onYes}
-          className="group relative px-10 py-4 bg-pink-500 hover:bg-pink-600 text-white font-bold text-2xl rounded-full shadow-lg hover:shadow-pink-400/50 transition-all active:scale-95"
+          className="group relative z-10 px-10 py-4 bg-pink-500 hover:bg-pink-600 text-white font-bold text-2xl rounded-full shadow-lg hover:shadow-pink-400/50 transition-all active:scale-95"
         >
           <span className="flex items-center gap-2">
             YES! <Sparkles className="group-hover:animate-spin" size={24} />
           </span>
         </button>
 
-        {/* The Elusive No Button */}
+        {/* The Roaming No Button */}
         <motion.button
           onMouseEnter={onNoHover}
-          onClick={onNoHover} // Just in case they are fast!
+          onClick={onNoHover}
           animate={{
-            x: noButtonPos.isAbsolute ? noButtonPos.x as number : 0,
-            y: noButtonPos.isAbsolute ? noButtonPos.y as number : 0,
+            x: noButtonPos.x as number,
+            y: noButtonPos.y as number,
           }}
-          transition={{ type: "spring", stiffness: 150, damping: 15 }}
-          className={`${
-            noButtonPos.isAbsolute ? 'fixed z-[100]' : 'relative'
-          } px-10 py-4 bg-gray-200 hover:bg-gray-300 text-gray-600 font-bold text-2xl rounded-full shadow-md transition-colors`}
-          style={noButtonPos.isAbsolute ? { top: 0, left: 0 } : {}}
+          transition={{ type: "spring", stiffness: 200, damping: 20 }}
+          className="relative px-10 py-4 bg-gray-200 hover:bg-gray-300 text-gray-600 font-bold text-2xl rounded-full shadow-md transition-colors z-20"
         >
           No...
         </motion.button>
